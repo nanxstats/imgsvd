@@ -46,20 +46,41 @@ shinyServer(function(input, output) {
     
     if ( is.null(input$file1) ) {
       
-      return( list('out1' = 'cthd.jpg') )
+      return( list('out' = 'cthd.jpg',
+                   'tp' = 'image/jpeg',
+                   'k' = 20L) )
       
       } else if ( !is.null(input$file1) ) {
-      
+        
+        imgtype = input$file1$type
         inFile1 = input$file1$datapath
         neig    = as.integer(input$intk)
         
-        rawimg = jpeg::readJPEG(inFile1)
+        if ( imgtype == 'image/jpeg' ) {
+          
+          rawimg = jpeg::readJPEG(inFile1)
+          
+          outfile1 = paste0('zzz-upload/', gsub(' ', '-', gsub(':', '-', Sys.time())), '-', uuid::UUIDgenerate(TRUE), '.jpg')
+          jpeg::writeJPEG(image = rawimg, target = outfile1, 1)
+          
+          } else if ( imgtype == 'image/png' ) {
+            
+            rawimg = png::readPNG(inFile1)
+            
+            outfile1 = paste0('zzz-upload/', gsub(' ', '-', gsub(':', '-', Sys.time())), '-', uuid::UUIDgenerate(TRUE), '.png')
+            png::writePNG(image = rawimg, target = outfile1, 1)
+            
+            } else {
+              
+              return( list('out' = 'cthd.jpg',
+                           'tp' = 'image/jpeg',
+                           'k' = 20L) )
+            
+            }
         
-        outfile1 = paste0('zzz-upload/', gsub(' ', '-', gsub(':', '-', Sys.time())), '-', uuid::UUIDgenerate(TRUE), '.jpg')
-        jpeg::writeJPEG(image = rawimg, target = outfile1, 1)
-        
-        list('out1' = outfile1, 
-             'k'    = neig
+        list('out' = outfile1, 
+             'tp' = imgtype, 
+             'k' = neig
              )
       
       }
@@ -70,23 +91,46 @@ shinyServer(function(input, output) {
     
     if ( is.null(input$file1) ) {
       
-      return( list('out2' = 'cthd-svd.jpg') )
+      return( list('out' = 'cthd-svd.jpg',
+                   'tp' = 'image/jpeg',
+                   'k' = 20L) )
       
       } else if ( !is.null(input$file1) ) {
         
+        imgtype = input$file1$type
         inFile1 = input$file1$datapath
         neig    = as.integer(input$intk)
         
-        rawimg = jpeg::readJPEG(inFile1)
+        if ( imgtype == 'image/jpeg' ) {
+          
+          rawimg = jpeg::readJPEG(inFile1)
+          
+          outfile2 = paste0('zzz-compressed/', uuid::UUIDgenerate(TRUE), '.jpg')
+          lst = factorize(rawimg, 100)
+          m   = recoverimg(lst, neig)
+          jpeg::writeJPEG(image = m, target = outfile2, 1)
+          
+          } else if ( imgtype == 'image/png' ) {
+            
+            rawimg = png::readPNG(inFile1)
+            
+            outfile2 = paste0('zzz-compressed/', uuid::UUIDgenerate(TRUE), '.png')
+            lst = factorize(rawimg, 100)
+            m   = recoverimg(lst, neig)
+            png::writePNG(image = m, target = outfile2, 1)
+            
+            } else {
+              
+              return( list('out' = 'cthd-svd.jpg',
+                           'tp' = 'image/jpeg',
+                           'k' = 20L) )
+            
+            }
         
-        outfile2 = paste0('zzz-compressed/', uuid::UUIDgenerate(TRUE), '.jpg')
-        lst = factorize(rawimg, 100)
-        m   = recoverimg(lst, neig)
-        jpeg::writeJPEG(image = m, target = outfile2, 1)
-        
-        list('out2' = outfile2, 
-             'k'    = neig
-        )
+        list('out' = outfile2, 
+             'tp' = imgtype, 
+             'k' = neig
+             )
       
       }
     
@@ -96,8 +140,8 @@ shinyServer(function(input, output) {
     
     result1 = writeOrigin()
     
-    list(src = result1$out1, 
-         contentType = 'image/jpeg',
+    list(src = result1$out, 
+         contentType = result1$tp, 
          alt = "Original Image"
          )
     
@@ -107,8 +151,8 @@ shinyServer(function(input, output) {
     
     result2 = writeSVD()
     
-    list(src = result2$out2, 
-         contentType = 'image/jpeg', 
+    list(src = result2$out, 
+         contentType = result2$tp, 
          alt = paste("Compressed Image with k = ", as.character(result2$k))
          )
     
