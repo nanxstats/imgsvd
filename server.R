@@ -95,7 +95,7 @@ shinyServer(function(input, output) {
 
     list(
       src = if (is.null(input$file1)) 'cthd.jpg' else input$file1$datapath,
-      alt = "Original Image"
+      title = "Original Image"
     )
 
   }, deleteFile = FALSE)
@@ -106,7 +106,7 @@ shinyServer(function(input, output) {
     
     list(src = result2$out, 
          contentType = result2$tp, 
-         alt = paste("Compressed Image with k = ", as.character(result2$k))
+         title = paste("Compressed Image with k = ", as.character(result2$k))
          )
     
     }, deleteFile = FALSE)
