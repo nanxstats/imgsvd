@@ -42,51 +42,6 @@ recoverimg = function(lst, k) {
 
 shinyServer(function(input, output) {
 
-  writeOrigin = reactive({
-    
-    if ( is.null(input$file1) ) {
-      
-      return( list('out' = 'cthd.jpg',
-                   'tp' = 'image/jpeg',
-                   'k' = 20L) )
-      
-        
-      } else {
-        imgtype = input$file1$type
-        inFile1 = input$file1$datapath
-        neig    = as.integer(input$intk)
-        
-        if ( imgtype == 'image/jpeg' ) {
-          
-          rawimg = jpeg::readJPEG(inFile1)
-          
-          outfile1 = paste0('zzz-upload/', gsub(' ', '-', gsub(':', '-', Sys.time())), '-', uuid::UUIDgenerate(TRUE), '.jpg')
-          jpeg::writeJPEG(image = rawimg, target = outfile1, 1)
-          
-          } else if ( imgtype == 'image/png' ) {
-            
-            rawimg = png::readPNG(inFile1)
-            
-            outfile1 = paste0('zzz-upload/', gsub(' ', '-', gsub(':', '-', Sys.time())), '-', uuid::UUIDgenerate(TRUE), '.png')
-            png::writePNG(image = rawimg, target = outfile1, 1)
-            
-            } else {
-              
-              return( list('out' = 'cthd.jpg',
-                           'tp' = 'image/jpeg',
-                           'k' = 20L) )
-            
-            }
-        
-        list('out' = outfile1, 
-             'tp' = imgtype, 
-             'k' = neig
-             )
-      
-      }
-    
-  })
-  
   writeSVD = reactive({
     
     if ( is.null(input$file1) ) {
@@ -137,16 +92,14 @@ shinyServer(function(input, output) {
   })
   
   output$originImage = renderImage({
-    
-    result1 = writeOrigin()
-    
-    list(src = result1$out, 
-         contentType = result1$tp, 
-         alt = "Original Image"
-         )
-    
-    }, deleteFile = FALSE)
-  
+
+    list(
+      src = if (is.null(input$file1)) 'cthd.jpg' else input$file1$datapath,
+      alt = "Original Image"
+    )
+
+  }, deleteFile = FALSE)
+
   output$svdImage = renderImage({
     
     result2 = writeSVD()
