@@ -2,7 +2,6 @@ require('shiny')
 require('rARPACK')
 require('jpeg')
 require('png')
-require('uuid')
 
 factorize = function(m, k) {
 
@@ -61,7 +60,7 @@ shinyServer(function(input, output) {
 
     rawimg = (if (isJPEG) jpeg::readJPEG else png::readPNG)(inFile1)
 
-    outfile2 = paste0('zzz-compressed/', uuid::UUIDgenerate(TRUE), ifelse(isJPEG, '.jpg', '.png'))
+    outfile2 = tempfile(fileext = ifelse(isJPEG, '.jpg', '.png'))
     lst = factorize(rawimg, 100)
     m   = recoverimg(lst, neig)
     (if (isJPEG) jpeg::writeJPEG else png::writePNG)(image = m, target = outfile2, 1)
