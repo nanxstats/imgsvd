@@ -50,8 +50,8 @@ shinyServer(function(input, output) {
                    'tp' = 'image/jpeg',
                    'k' = 20L) )
       
-      } else if ( !is.null(input$file1) ) {
         
+      } else {
         imgtype = input$file1$type
         inFile1 = input$file1$datapath
         neig    = as.integer(input$intk)
@@ -95,8 +95,8 @@ shinyServer(function(input, output) {
                    'tp' = 'image/jpeg',
                    'k' = 20L) )
       
-      } else if ( !is.null(input$file1) ) {
         
+      } else {
         imgtype = input$file1$type
         inFile1 = input$file1$datapath
         neig    = as.integer(input$intk)
