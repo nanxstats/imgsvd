@@ -30,14 +30,14 @@ shinyUI(pageWithSidebar(
       tabPanel("Let's do this!", 
                h3("Original Image"), 
                tags$hr(), 
-               imageOutput("originImage"), 
                tags$hr(), 
                h3("Compressed Image"), 
                tags$hr(), 
-               imageOutput("svdImage")
       ), 
       
       tabPanel("Cite this app", 
+               imageOutput("originImage", height = "auto"),
+               imageOutput("svdImage", height = "auto")
                includeHTML('cite.html')
       )
       
