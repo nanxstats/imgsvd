@@ -3,6 +3,7 @@ require('rARPACK')
 require('jpeg')
 require('png')
 
+# Factorize m with k-th order truncated SVD
 factorize = function(m, k) {
 
   r = rARPACK::svds(m[, , 1], k)
@@ -13,8 +14,9 @@ factorize = function(m, k) {
 
 }
 
+# Recover m using k-th order truncated SVD
 recoverimg = function(lst, k) {
-
+  # Recover a single channel
   recover0 = function(fac, k) {
 
     dmat = diag(k)
@@ -30,13 +32,7 @@ recoverimg = function(lst, k) {
   r = recover0(lst$r, k)
   g = recover0(lst$g, k)
   b = recover0(lst$b, k)
-  m = array(0, c(nrow(r), ncol(r), 3))
-  m[, , 1] = r
-  m[, , 2] = g
-  m[, , 3] = b
-
-  return(m)
-
+  return(array(c(r, g, b), c(nrow(r), ncol(r), 3)))
 }
 
 shinyServer(function(input, output) {

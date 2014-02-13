@@ -2,7 +2,6 @@ require('shiny')
 require('rARPACK')
 require('jpeg')
 require('png')
-require('uuid')
 
 shinyUI(pageWithSidebar(
 
