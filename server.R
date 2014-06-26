@@ -61,7 +61,7 @@ shinyServer(function(input, output) {
         lst
     })
     
-    doFactorization = reactive({
+    doRecovery = reactive({
         
         imgtype = input$file1$type
         
@@ -97,7 +97,7 @@ shinyServer(function(input, output) {
     output$svdImage = renderImage({
         
         #lst = writeSVD()
-        result2 = doFactorization()
+        result2 = doRecovery()
         
         list(src = result2$out,
              title = paste("Compressed Image with k = ", as.character(result2$k))
