@@ -3,7 +3,7 @@ library("markdown")
 
 shinyUI(fluidPage(
 
-  title = "ImgSVD - Image Compression via SVD",
+  title = "ImgSVD: Image Compression via SVD",
   theme = "bootstrap.min.css",
 
   # css hacks for responsive images
@@ -17,7 +17,7 @@ shinyUI(fluidPage(
     "#svd_image img {max-width: 100%; width: 100%; height: auto}"
   )),
 
-  titlePanel("ImgSVD - Image Compression via SVD"),
+  titlePanel("ImgSVD: Image Compression via SVD"),
 
   tags$hr(),
 
