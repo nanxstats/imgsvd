@@ -1,24 +1,24 @@
 # ImgSVD
 
-ImgSVD is a Shiny app for image compression via singular value decomposition (SVD).
+ImgSVD is a Shiny application for image compression via singular value decomposition (SVD).
 
 ## Introduction
 
-The ImgSVD app is inspired by Yihui Xie's comment in Yixuan Qiu's [article](http://cos.name/2014/02/svd-and-image-compression/) on image compression via singular value decomposition with the R package [rARPACK](http://cran.r-project.org/web/packages/rARPACK/).
+This application is inspired by Yihui Xie's comment in Yixuan Qiu's [article](https://cos.name/2014/02/svd-and-image-compression/) on image compression via singular value decomposition with the R package [rARPACK](https://cran.r-project.org/package=rARPACK).
 
 ## Deploy
 
-To deploy ImgSVD locally, simply run the following from terminal:
+To run ImgSVD locally, simply run the following from terminal:
 
-    git clone https://github.com/road2stat/imgsvd.git
-    R -e "shiny::runApp('~/imgsvd/', launch.browser = TRUE)"
+```bash
+git clone https://github.com/road2stat/imgsvd.git
+R -e "shiny::runApp('~/imgsvd/', launch.browser = TRUE)"
+```
 
-and it's ready to go. Note that the depended packages should be installed first in R:
+and you are all set. Note that these packages should be installed first:
 
-    install.packages(c('shiny', 'rARPACK', 'jpeg', 'png'))
+```r
+install.packages(c("shiny", "markdown", "rARPACK", "jpeg", "png"))
+```
 
-Currently ImgSVD supports images in JPEG / PNG format.
-
-## References
-
- [1] Yixuan Qiu. (2014). [Singular Value Decomposition and Image Compression](http://cos.name/2014/02/svd-and-image-compression/).
+Currently, ImgSVD supports input images in JPEG/PNG format.
