@@ -26,7 +26,7 @@ shinyUI(fluidPage(
       width = 6,
       h4("Upload your image"),
       tags$hr(),
-      fileInput("file1", "Select a PNG / JPEG File:")
+      fileInput("file1", "Select a PNG or JPEG file:")
     ),
     column(
       width = 6,
