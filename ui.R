@@ -1,49 +1,64 @@
-require('shiny')
-require('rARPACK')
-require('jpeg')
-require('png')
+library("shiny")
+library("markdown")
 
-shinyUI(pageWithSidebar(
+shinyUI(fluidPage(
 
-  headerPanel(title = 'ImgSVD - Image Compression via SVD',
-              windowTitle = 'ImgSVD - Image Compression via SVD'),
+  title = "ImgSVD - Image Compression via SVD",
+  theme = "bootstrap.min.css",
 
-  sidebarPanel(
-    includeCSS('boot.css'),
-    includeHTML('header.html'),
+  # css hacks for responsive images
+  tags$head(tags$style(
+    type="text/css",
+    "#original_image img {max-width: 100%; width: 100%; height: auto}"
+  )),
 
-    helpText("Step 1. Upload Image"),
-    fileInput('file1', 'Upload a PNG / JPEG File:'),
+  tags$head(tags$style(
+    type="text/css",
+    "#svd_image img {max-width: 100%; width: 100%; height: auto}"
+  )),
 
-    tags$hr(),
+  titlePanel("ImgSVD - Image Compression via SVD"),
 
-    helpText("Step 2. Selecting k Singular Values"),
-    sliderInput("intk", "Slide to choose k:", min = 1, max = 100, value = 5)
+  tags$hr(),
 
+  fluidRow(
+    column(
+      width = 6,
+      h4("Upload your image"),
+      tags$hr(),
+      fileInput("file1", "Select a PNG / JPEG File:")
+    ),
+    column(
+      width = 6,
+      h4("Select top-k singular values"),
+      tags$hr(),
+      sliderInput("intk", "Slide to choose k:", min = 1, max = 100, value = 5)
+    )
   ),
 
-  mainPanel(
+  tags$hr(),
 
-    tabsetPanel(
+  fluidRow(
+    column(
+      width = 6,
+      h4("Original Image"),
+      tags$hr(),
+      imageOutput("original_image", height = "auto")),
+    column(
+      width = 6,
+      h4("Compressed Image"),
+      tags$hr(),
+      imageOutput("svd_image", height = "auto")
+    )
+  ),
 
-      tabPanel("Let's do this!",
-               h3("Original Image"),
-               tags$hr(),
-               imageOutput("originImage", height = "auto"),
-               tags$hr(),
-               h3("Compressed Image"),
-               tags$hr(),
-               imageOutput("svdImage", height = "auto")
-      ),
+  tags$hr(),
 
-      tabPanel("Cite this app",
-               includeHTML('cite.html')
-      )
-
-    ),
-
-    includeHTML('footer.html')
-
+  fluidRow(
+    column(
+      width = 12,
+      includeMarkdown("footer.md")
+    )
   )
 
 ))
