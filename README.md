@@ -2,13 +2,11 @@
 
 ImgSVD is a Shiny application for image compression via singular value decomposition (SVD).
 
-## Introduction
-
 This application is inspired by Yihui Xie's comment in Yixuan Qiu's [article](https://cos.name/2014/02/svd-and-image-compression/) on image compression via singular value decomposition with the R package [rARPACK](https://cran.r-project.org/package=rARPACK).
 
-## Deploy
+## Play with it
 
-To run ImgSVD locally, simply run the following from terminal:
+To run this Shiny app locally, simply run the following from terminal:
 
 ```bash
 git clone https://github.com/road2stat/imgsvd.git
