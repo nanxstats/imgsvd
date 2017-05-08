@@ -2,4 +2,4 @@
 
 ###### The idea is from [the article](https://cos.name/2014/02/svd-and-image-compression/) by [Yixuan Qiu](http://statr.me). Singular value decomposition powered by his R package [rARPACK](https://cran.r-project.org/package=rARPACK).
 
-###### Demo image from Ang Lee's Movie [Crouching Tiger Hidden Dragon](http://www.imdb.com/title/tt0190332/).
+###### Demo image from Ang Lee's [Crouching Tiger Hidden Dragon](http://www.imdb.com/title/tt0190332/).
