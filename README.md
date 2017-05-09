@@ -1,4 +1,4 @@
-# ImgSVD
+# ImgSVD <img src="logo.png" align="right" alt="logo" height="180" width="180" />
 
 ImgSVD is a Shiny application for image compression via singular value decomposition (SVD).
 
