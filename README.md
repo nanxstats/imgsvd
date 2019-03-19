@@ -13,7 +13,7 @@ install.packages(c("shiny", "markdown", "rARPACK", "jpeg", "png"))
 then use:
 
 ```r
-shiny::runGitHub("road2stat/imgsvd")
+shiny::runGitHub("nanxstats/imgsvd")
 ```
 
 Currently, ImgSVD supports input images in JPEG or PNG format.
